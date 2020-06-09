@@ -1,36 +1,21 @@
 import cv2
-import matplotlib.pyplot as plt
+import numpy as np
 
-image1= cv2.imread('d3/1.jpg')
-image2= cv2.imread('d3/2.jpg')
-image3= cv2.imread('d3/3.jpg')
-image4= cv2.imread('d3/4.jpg')
-image5= cv2.imread('d3/5.jpg')
-image6= cv2.imread('d3/6.jpg')
-image7= cv2.imread('d3/7.jpg')
+image= cv2.imread('d3/7.jpg')
+blurred = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+#blurred= cv2.medianBlur(gray,3)
+#blurred= cv2.GaussianBlur(gray,(5,5),0)
+blurred=cv2.resize(blurred,(500,500))
+cv2.imshow('blurred gray',blurred)
 
+start=80
+increament=10
 
-hist1 = cv2.calcHist([image1],[0],None,[256],[0,256])
-hist1= 100*hist1/sum(hist1)
-hist2 = cv2.calcHist([image2],[0],None,[256],[0,256])
-hist2= 100*hist2/sum(hist2)
-hist3 = cv2.calcHist([image3],[0],None,[256],[0,256])
-hist3= 100*hist3/sum(hist3)
-hist4 = cv2.calcHist([image4],[0],None,[256],[0,256])
-hist4= 100*hist4/sum(hist4)
-hist5 = cv2.calcHist([image5],[0],None,[256],[0,256])
-hist5= 100*hist5/sum(hist5)
-hist6 = cv2.calcHist([image6],[0],None,[256],[0,256])
-hist6= 100*hist6/sum(hist6)
-hist7 = cv2.calcHist([image7],[0],None,[256],[0,256])
-hist7= 100*hist7/sum(hist7)
-
-plt.subplot(231), plt.plot(hist1)
-plt.subplot(232), plt.plot(hist2)
-plt.subplot(233), plt.plot(hist3)
-plt.subplot(234), plt.plot(hist4)
-plt.subplot(235), plt.plot(hist5)
-plt.subplot(236), plt.plot(hist6)
-plt.subplot(337), plt.plot(hist7)
-
-plt.show()
+for _ in range(8):
+    image_name= str(start)+"-"+str(start+increament)
+    _,thresh= cv2.threshold(blurred,start+increament,255,cv2.THRESH_TOZERO_INV)
+    _,thresh= cv2.threshold(thresh, start, 255, cv2.THRESH_TOZERO)
+    thresh= cv2.resize(thresh, (500, 500))
+    _,thresh = cv2.threshold(thresh,1, 255, cv2.THRESH_BINARY)
+    cv2.imshow(image_name, thresh)
+    start=start+increament

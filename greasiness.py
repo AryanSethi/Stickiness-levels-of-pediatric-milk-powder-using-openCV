@@ -1,13 +1,15 @@
 import cv2
+import numpy as np
 
-image= cv2.imread('d3/1.jpg')
+image= cv2.imread('d3/7.jpg')
 blurred = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 #blurred= cv2.medianBlur(gray,3)
 #blurred= cv2.GaussianBlur(gray,(5,5),0)
-cv2.imshow('blurred gray',cv2.resize(blurred,(700,700)))
+blurred=cv2.resize(blurred,(500,500))
+cv2.imshow('blurred gray',blurred)
 
-start=110
-increament=40
+start=100
+increament=30
 
 for _ in range(1):
     image_name= str(start)+"-"+str(start+increament)
@@ -19,12 +21,20 @@ for _ in range(1):
     start=start+increament
 
 
-median=cv2.medianBlur(thresh,9)
-cv2.imshow('median',median)
-gaussian=cv2.GaussianBlur(median,(51,51),0)
-cv2.imshow('gaussian',gaussian)
-_,final=cv2.threshold(gaussian,150,255,cv2.THRESH_BINARY)
+kernel = np.ones((2,2),np.uint8)
+dilation = cv2.dilate(thresh,kernel,iterations = 1)
+final= cv2.bitwise_and(blurred,dilation)
 cv2.imshow('final',final)
+
+# median=cv2.medianBlur(thresh,3)
+# cv2.imshow('median original',median)
+# gaussian=cv2.GaussianBlur(thresh,(5,5),100)
+# cv2.imshow('gaussian',gaussian)
+# _,final=cv2.threshold(gaussian,15,255,cv2.THRESH_BINARY)
+
+#final=cv2.bitwise_and(final,blurred)
+# cv2.imshow('final',final)
+
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
