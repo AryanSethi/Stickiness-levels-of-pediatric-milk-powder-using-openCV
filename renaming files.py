@@ -1,6 +1,6 @@
 import os
 
-path= "D:/work/spot counting/d1/"
+path= "D:/work/Milk Project/turbidity difference/"
 i=1
 
 for filename in os.listdir(path):
