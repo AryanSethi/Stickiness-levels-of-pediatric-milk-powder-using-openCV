@@ -1,6 +1,6 @@
 import os
 
-path= "D:/work/Milk Project/turbidity difference/"
+path= "D:/work/Milk Project/turbidity difference/Light_behind/shades/"
 i=1
 
 for filename in os.listdir(path):
