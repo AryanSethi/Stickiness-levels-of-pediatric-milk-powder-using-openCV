@@ -10,3 +10,7 @@ The above is a histogram for different images and greassiness levels we tested.
 Below is an example showing how we seperated blobs and grease and made it automated.
 
 ![greasiness](https://github.com/AryanSethi/Stickiness-levels-of-pediatric-milk-powder-using-openCV/blob/master/analysis%20images/binary%20ranges%20for%206th%20testing%20image/120-160.JPG)
+
+Original blobs and grease looks somehting like :
+
+![orig](https://github.com/AryanSethi/Stickiness-levels-of-pediatric-milk-powder-using-openCV/blob/master/d1/2.jpg)
